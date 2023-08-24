@@ -1,0 +1,104 @@
+= qBittorrent File Mover
+
+image:https://img.shields.io/badge/version-0.1.0-blue[]
+
+A Rust-based tool to automate the management of completed torrents in qBittorrent, moving files based on categories and ensuring seamless organization.
+
+== Table of Contents
+
+. <<overview,Overview>>
+. <<features,Features>>
+. <<prerequisites,Prerequisites>>
+. <<installation,Installation>>
+. <<usage,Usage>>
+. <<contributing,Contributing>>
+. <<license,License>>
+
+== [[overview]]Overview
+
+`qBittorrent File Mover` is designed to help users automatically manage their downloaded torrents. 
+Once a torrent completes downloading in qBittorrent, this tool checks its category, and based on predefined configurations, moves the downloaded file to the appropriate directory.
+
+== [[features]]Features
+
+* Monitor qBittorrent for completed torrents.
+* Move completed torrents to directories based on their category.
+* Supports multiple qBittorrent instances.
+* Rate limiting to avoid overloading the qBittorrent server.
+* Configurable via a YAML file.
+* Logging support.
+
+== [[prerequisites]]Prerequisites
+
+* Rust (latest stable version recommended).
+* qBittorrent with Web UI enabled.
+
+== [[installation]]Installation
+
+1. Clone the repository:
++
+----
+$ git clone https://github.com/harrychin/qbittorrent_file_mover.git
+$ cd qbittorrent_file_mover
+----
+
+2. Build the project:
++
+----
+$ cargo build --release
+----
+
+3. The compiled binary will be available under `target/release`.
+
+== [[usage]]Usage
+
+1. Before running the tool, ensure you've set up the `config.yaml` file (see <<Example Configuration>>) with your qBittorrent server details and desired settings.
+
+2. Execute the binary:
++
+----
+$ ./target/release/qbittorrent_file_mover
+----
+
+3. The tool will now monitor qBittorrent for completed torrents and move them based on your configurations.
+
+== [[contributing]]Contributing
+
+We welcome contributions!
+If you find a bug or want to propose a new feature:
+
+. Fork the repository.
+. Create a new branch for your changes.
+. Make your changes.
+. Submit a pull request.
+
+== [[license]]License
+
+This project is licensed under the AGPLv3+ License.
+See the `LICENSE` file for details.
+
+== Contact
+
+If you have any questions or feedback, please open an issue on GitHub.
+We appreciate your input!
+
+
+== Example Configuration
+
+This is an example of what your `config.yaml` should look like.
+Fill in the placeholders with your actual data.
+
+[source,yaml]
+----
+servers:
+  - qbit_url: "http://localhost:8080"
+    username: "admin"
+    password: "adminadmin"
+    categories: 
+      distros: "/path/to/distros/directory"
+check_interval: 60
+watcher_interval: 60
+rate_limit_delay: 5
+log_file: "qbittorrent-mover.log"
+max_log_file_size: "10MB"
+----
