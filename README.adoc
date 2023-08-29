@@ -96,9 +96,9 @@ servers:
     password: "adminadmin"
     categories: 
       distros: "/path/to/distros/directory"
-check_interval: 60
-watcher_interval: 60
+    root_path: ""
+    path_prefix: ""
 rate_limit_delay: 5
 log_file: "qbittorrent-mover.log"
-max_log_file_size: "10MB"
+max_log_file_size: "10M"
 ----
